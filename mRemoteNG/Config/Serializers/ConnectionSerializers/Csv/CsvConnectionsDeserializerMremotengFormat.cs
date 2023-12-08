@@ -264,6 +264,12 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
                     connectionRecord.UseEnhancedMode = value;
             }
 
+            if (headers.Contains("EnableSecondFactor"))
+            {
+                if (bool.TryParse(connectionCsv[headers.IndexOf("EnableSecondFactor")], out bool value))
+                    connectionRecord.EnableSecondFactor = value;
+            }
+
             if (headers.Contains("RenderingEngine"))
             {
                 if (Enum.TryParse(connectionCsv[headers.IndexOf("RenderingEngine")], out HTTPBase.RenderingEngine value))
@@ -701,6 +707,12 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Csv
             {
                 if (bool.TryParse(connectionCsv[headers.IndexOf("InheritUseEnhancedMode")], out bool value))
                     connectionRecord.Inheritance.UseEnhancedMode = value;
+            }
+
+            if (headers.Contains("InheritEnableSecondFactor"))
+            {
+                if (bool.TryParse(connectionCsv[headers.IndexOf("InheritEnableSecondFactor")], out bool value))
+                    connectionRecord.Inheritance.EnableSecondFactor = value;
             }
 
             if (headers.Contains("InheritRenderingEngine"))

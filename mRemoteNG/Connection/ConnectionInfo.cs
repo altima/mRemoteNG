@@ -317,6 +317,7 @@ namespace mRemoteNG.Connection
             UseRCG = Settings.Default.ConDefaultUseRCG;
             UseVmId = Settings.Default.ConDefaultUseVmId;
             UseEnhancedMode = Settings.Default.ConDefaultUseEnhancedMode;
+            EnableSecondFactor = Settings.Default.ConEnableSecondFactor;
         }
 
         private void SetRemoteDesktopServicesDefaults()

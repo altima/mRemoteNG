@@ -33,7 +33,8 @@ namespace mRemoteNG.Connection
         private string _domain = "";
         private string _vmId = "";
         private bool _useEnhancedMode;
-        
+        private bool _enableSecondFactor;
+
         private string _sshTunnelConnectionName = "";
         private ProtocolType _protocol;
         private RdpVersion _rdpProtocolVersion;
@@ -474,6 +475,16 @@ namespace mRemoteNG.Connection
             get => GetPropertyValue("UseEnhancedMode", _useEnhancedMode);
             set => SetField(ref _useEnhancedMode, value, "UseEnhancedMode");
         }
+
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 3),
+         LocalizedAttributes.LocalizedDisplayName(nameof(Language.EnableSecondFactor)),
+         LocalizedAttributes.LocalizedDescription(nameof(Language.PropertyDescriptionEnableSecondFactor)),
+         AttributeUsedInProtocol(ProtocolType.RDP)]
+        public virtual bool EnableSecondFactor
+        {
+            get => GetPropertyValue("EnableSecondFactor", _enableSecondFactor);
+            set => SetField(ref _enableSecondFactor, value, "EnableSecondFactor");
+        }
         #endregion
 
         #region RD Gateway
@@ -895,7 +906,6 @@ namespace mRemoteNG.Connection
             get => GetPropertyValue("RDPStartProgramWorkDir", _rdpStartProgramWorkDir);
             set => SetField(ref _rdpStartProgramWorkDir, value, "RDPStartProgramWorkDir");
         }
-
         #endregion
 
         #region VNC

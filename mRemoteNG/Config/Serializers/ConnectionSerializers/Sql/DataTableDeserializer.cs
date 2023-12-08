@@ -145,6 +145,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             connectionInfo.UseConsoleSession = MiscTools.GetBooleanValue(dataRow["ConnectToConsole"]);
             connectionInfo.UseCredSsp = MiscTools.GetBooleanValue(dataRow["UseCredSsp"]);
             connectionInfo.UseEnhancedMode = MiscTools.GetBooleanValue(dataRow["UseEnhancedMode"]);
+            connectionInfo.EnableSecondFactor = MiscTools.GetBooleanValue(dataRow["EnableSecondFactor"]);
             connectionInfo.UseRCG = MiscTools.GetBooleanValue(dataRow["UseRCG"]);
             connectionInfo.UseRestrictedAdmin = MiscTools.GetBooleanValue(dataRow["UseRestrictedAdmin"]);
             connectionInfo.UserField = (string)dataRow["UserField"];
@@ -224,6 +225,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             connectionInfo.Inheritance.UseConsoleSession = MiscTools.GetBooleanValue(dataRow["InheritUseConsoleSession"]);
             connectionInfo.Inheritance.UseCredSsp = MiscTools.GetBooleanValue(dataRow["InheritUseCredSsp"]);
             connectionInfo.Inheritance.UseEnhancedMode = MiscTools.GetBooleanValue(dataRow["InheritUseEnhancedMode"]);
+            connectionInfo.Inheritance.EnableSecondFactor = MiscTools.GetBooleanValue(dataRow["InheritEnableSecondFactor"]);
             connectionInfo.Inheritance.UseRCG = MiscTools.GetBooleanValue(dataRow["InheritUseRCG"]);
             connectionInfo.Inheritance.UseRestrictedAdmin = MiscTools.GetBooleanValue(dataRow["InheritUseRestrictedAdmin"]);
             connectionInfo.Inheritance.UserField = MiscTools.GetBooleanValue(dataRow["InheritUserField"]);

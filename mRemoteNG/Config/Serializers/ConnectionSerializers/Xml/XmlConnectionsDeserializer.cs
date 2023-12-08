@@ -505,6 +505,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                     connectionInfo.UseVmId = xmlnode.GetAttributeAsBool("UseVmId");
                     connectionInfo.VmId = xmlnode.GetAttributeAsString("VmId");
                     connectionInfo.UseEnhancedMode = xmlnode.GetAttributeAsBool("UseEnhancedMode");
+                    connectionInfo.EnableSecondFactor = xmlnode.GetAttributeAsBool("EnableSecondFactor");
                     connectionInfo.RdpVersion = xmlnode.GetAttributeAsEnum("RdpVersion", RdpVersion.Highest);
                     connectionInfo.SSHTunnelConnectionName = xmlnode.GetAttributeAsString("SSHTunnelConnectionName");
                     connectionInfo.OpeningCommand = xmlnode.GetAttributeAsString("OpeningCommand");
@@ -523,6 +524,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                     connectionInfo.Inheritance.UseVmId = xmlnode.GetAttributeAsBool("InheritUseVmId");
                     connectionInfo.Inheritance.VmId = xmlnode.GetAttributeAsBool("InheritVmId");
                     connectionInfo.Inheritance.UseEnhancedMode = xmlnode.GetAttributeAsBool("InheritUseEnhancedMode");
+                    connectionInfo.Inheritance.EnableSecondFactor = xmlnode.GetAttributeAsBool("InheritEnableSecondFactor");
                     connectionInfo.Inheritance.SSHTunnelConnectionName = xmlnode.GetAttributeAsBool("InheritSSHTunnelConnectionName");
                     connectionInfo.Inheritance.OpeningCommand = xmlnode.GetAttributeAsBool("InheritOpeningCommand");
                     connectionInfo.Inheritance.SSHOptions = xmlnode.GetAttributeAsBool("InheritSSHOptions");

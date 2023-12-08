@@ -180,6 +180,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             dataTable.Columns.Add("InheritUseConsoleSession", typeof(bool));
             dataTable.Columns.Add("InheritUseCredSsp", typeof(bool));
             dataTable.Columns.Add("InheritUseEnhancedMode", typeof(bool));
+            dataTable.Columns.Add("InheritEnableSecondFactor", typeof(bool));
             dataTable.Columns.Add("InheritUseRCG", typeof(bool));
             dataTable.Columns.Add("InheritUseRestrictedAdmin", typeof(bool));
             dataTable.Columns.Add("InheritUseVmId", typeof(bool));
@@ -243,6 +244,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             dataTable.Columns.Add("Type", typeof(string));
             dataTable.Columns.Add("UseCredSsp", typeof(bool));
             dataTable.Columns.Add("UseEnhancedMode", typeof(bool));
+            dataTable.Columns.Add("EnableSecondFactor", typeof(bool));
             dataTable.Columns.Add("UseRCG", typeof(bool));
             dataTable.Columns.Add("UseRestrictedAdmin", typeof(bool));
             dataTable.Columns.Add("UseVmId", typeof(bool));
@@ -353,6 +355,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             isFieldNotChange = isFieldNotChange && dataRow["StartProgramWorkDir"].Equals(connectionInfo.RDPStartProgramWorkDir);
             isFieldNotChange = isFieldNotChange && dataRow["UseCredSsp"].Equals(connectionInfo.UseCredSsp);
             isFieldNotChange = isFieldNotChange && dataRow["UseEnhancedMode"].Equals(connectionInfo.UseEnhancedMode);
+            isFieldNotChange = isFieldNotChange && dataRow["EnableSecondFactor"].Equals(connectionInfo.EnableSecondFactor);
             isFieldNotChange = isFieldNotChange && dataRow["UseRCG"].Equals(connectionInfo.UseRCG);
             isFieldNotChange = isFieldNotChange && dataRow["UseRestrictedAdmin"].Equals(connectionInfo.UseRestrictedAdmin);
             isFieldNotChange = isFieldNotChange && dataRow["UseVmId"].Equals(connectionInfo.UseVmId);
@@ -427,6 +430,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                     dataRow["InheritUseConsoleSession"].Equals(connectionInfo.Inheritance.UseConsoleSession) &&
                     dataRow["InheritUseCredSsp"].Equals(connectionInfo.Inheritance.UseCredSsp) &&
                     dataRow["InheritUseEnhancedMode"].Equals(connectionInfo.Inheritance.UseEnhancedMode) &&
+                    dataRow["InheritEnableSecondFactor"].Equals(connectionInfo.Inheritance.EnableSecondFactor) &&
                     dataRow["InheritUseRCG"].Equals(connectionInfo.Inheritance.UseRCG) &&
                     dataRow["InheritUseRestrictedAdmin"].Equals(connectionInfo.Inheritance.UseRestrictedAdmin) &&
                     dataRow["InheritUserField"].Equals(connectionInfo.Inheritance.UserField) &&
@@ -611,6 +615,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
             dataRow["Type"] = connectionInfo.GetTreeNodeType().ToString();
             dataRow["UseCredSsp"] = connectionInfo.UseCredSsp;
             dataRow["UseEnhancedMode"] = connectionInfo.UseEnhancedMode;
+            dataRow["EnableSecondFactor"] = connectionInfo.EnableSecondFactor;
             dataRow["UseRCG"] = connectionInfo.UseRCG;
             dataRow["UseRestrictedAdmin"] = connectionInfo.UseRestrictedAdmin;
             dataRow["UseVmId"] = connectionInfo.UseVmId;
@@ -689,6 +694,7 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Sql
                 dataRow["InheritUseConsoleSession"] = connectionInfo.Inheritance.UseConsoleSession;
                 dataRow["InheritUseCredSsp"] = connectionInfo.Inheritance.UseCredSsp;
                 dataRow["InheritUseEnhancedMode"] = connectionInfo.Inheritance.UseEnhancedMode;
+                dataRow["InheritEnableSecondFactor"] = connectionInfo.Inheritance.EnableSecondFactor;
                 dataRow["InheritUseRCG"] = connectionInfo.Inheritance.UseRCG;
                 dataRow["InheritUseRestrictedAdmin"] = connectionInfo.Inheritance.UseRestrictedAdmin;
                 dataRow["InheritUseVmId"] = connectionInfo.Inheritance.UseVmId;

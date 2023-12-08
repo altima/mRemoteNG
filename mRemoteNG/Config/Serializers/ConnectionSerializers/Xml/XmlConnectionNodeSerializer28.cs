@@ -42,7 +42,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             element.Add(new XAttribute("Name", connectionInfo.Name));
             element.Add(new XAttribute("VmId", connectionInfo.VmId));
             element.Add(new XAttribute("UseVmId", connectionInfo.UseVmId));
-            element.Add(new XAttribute("UseEnhancedMode", connectionInfo.UseVmId));
+            element.Add(new XAttribute("UseEnhancedMode", connectionInfo.UseEnhancedMode));
+            element.Add(new XAttribute("EnableSecondFactor", connectionInfo.EnableSecondFactor));
             element.Add(new XAttribute("Type", connectionInfo.GetTreeNodeType().ToString()));
             if (nodeAsContainer != null)
                 element.Add(new XAttribute("Expanded", nodeAsContainer.IsExpanded.ToString().ToLowerInvariant()));
@@ -306,6 +307,8 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
                 element.Add(new XAttribute("InheritUseVmId", inheritance.UseVmId.ToString().ToLowerInvariant()));
             if (inheritance.UseEnhancedMode)
                 element.Add(new XAttribute("InheritUseEnhancedMode", inheritance.UseEnhancedMode.ToString().ToLowerInvariant()));
+            if (inheritance.EnableSecondFactor)
+                element.Add(new XAttribute("InheritEnableSecondFactor", inheritance.EnableSecondFactor.ToString().ToLowerInvariant()));
             if (inheritance.ExternalCredentialProvider)
                 element.Add(new XAttribute("InheritExternalCredentialProvider", inheritance.ExternalCredentialProvider.ToString().ToLowerInvariant()));
             if (inheritance.UserViaAPI)

@@ -218,6 +218,12 @@ namespace mRemoteNG.Connection
          TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool UseEnhancedMode { get; set; }
 
+        [LocalizedAttributes.LocalizedCategory(nameof(Language.Protocol), 4),
+         LocalizedAttributes.LocalizedDisplayNameInherit(nameof(Language.EnableSecondFactor)),
+         LocalizedAttributes.LocalizedDescriptionInherit(nameof(Language.PropertyDescriptionEnableSecondFactor)),
+         TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
+        public bool EnableSecondFactor { get; set; }
+
         #endregion
 
         #region RD Gateway

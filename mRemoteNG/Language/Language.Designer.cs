@@ -1853,6 +1853,15 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Second Factor.
+        /// </summary>
+        internal static string EnableSecondFactor {
+            get {
+                return ResourceManager.GetString("EnableSecondFactor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Encoding.
         /// </summary>
         internal static string Encoding {
@@ -3843,6 +3852,15 @@ namespace mRemoteNG.Resources.Language {
         internal static string PropertyDescriptionEnableFontSmoothing {
             get {
                 return ResourceManager.GetString("PropertyDescriptionEnableFontSmoothing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to By setting this to true, a popup will ask for a second factor which is appanded to the username. Sample: &quot;&lt;username&gt;-&lt;secondfactor&gt;&quot;.
+        /// </summary>
+        internal static string PropertyDescriptionEnableSecondFactor {
+            get {
+                return ResourceManager.GetString("PropertyDescriptionEnableSecondFactor", resourceCulture);
             }
         }
         

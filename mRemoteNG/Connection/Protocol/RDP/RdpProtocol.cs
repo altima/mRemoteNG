@@ -153,7 +153,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 Control.Anchor = AnchorStyles.None;
 
                 _rdpClient = (MsRdpClient6NotSafeForScripting)((AxHost)Control).GetOcx();
-                
+
                 return true;
             }
             catch (COMException ex)
@@ -326,7 +326,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
             {
                 _rdpClient.AdvancedSettings7.EnableCredSspSupport = connectionInfo.UseCredSsp;
             }
-            
+
             SetUseConsoleSession();
             SetPort();
             RedirectKeys = connectionInfo.RedirectKeys;
@@ -406,42 +406,42 @@ namespace mRemoteNG.Connection.Protocol.RDP
                         _rdpClient.TransportSettings2.GatewayCredSharing = 0;
                         break;
                     default:
-                    {
-                        _rdpClient.TransportSettings2.GatewayCredSharing = 0;
-
-                        var gwu = connectionInfo.RDGatewayUsername;
-                        var gwp = connectionInfo.RDGatewayPassword;
-                        var gwd = connectionInfo.RDGatewayDomain;
-                        var pkey = "";
-
-                        // access secret server api if necessary
-                        if (InterfaceControl.Info.RDGatewayExternalCredentialProvider == ExternalCredentialProvider.DelineaSecretServer)
                         {
-                            try
+                            _rdpClient.TransportSettings2.GatewayCredSharing = 0;
+
+                            var gwu = connectionInfo.RDGatewayUsername;
+                            var gwp = connectionInfo.RDGatewayPassword;
+                            var gwd = connectionInfo.RDGatewayDomain;
+                            var pkey = "";
+
+                            // access secret server api if necessary
+                            if (InterfaceControl.Info.RDGatewayExternalCredentialProvider == ExternalCredentialProvider.DelineaSecretServer)
                             {
-                                string RDGUserViaAPI = InterfaceControl.Info.RDGatewayUserViaAPI;
-                                ExternalConnectors.DSS.SecretServerInterface.FetchSecretFromServer($"{RDGUserViaAPI}", out gwu, out gwp, out gwd, out pkey);
+                                try
+                                {
+                                    string RDGUserViaAPI = InterfaceControl.Info.RDGatewayUserViaAPI;
+                                    ExternalConnectors.DSS.SecretServerInterface.FetchSecretFromServer($"{RDGUserViaAPI}", out gwu, out gwp, out gwd, out pkey);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Event_ErrorOccured(this, "Secret Server Interface Error: " + ex.Message, 0);
+                                }
+
                             }
-                            catch (Exception ex)
+
+                            if (connectionInfo.RDGatewayUseConnectionCredentials != RDGatewayUseConnectionCredentials.AccessToken)
                             {
-                                Event_ErrorOccured(this, "Secret Server Interface Error: " + ex.Message, 0);
+                                _rdpClient.TransportSettings2.GatewayUsername = gwu;
+                                _rdpClient.TransportSettings2.GatewayPassword = gwp;
+                                _rdpClient.TransportSettings2.GatewayDomain = gwd;
+                            }
+                            else
+                            {
+                                //TODO: should we check client version and throw if it is less than 7
                             }
 
+                            break;
                         }
-
-                        if (connectionInfo.RDGatewayUseConnectionCredentials != RDGatewayUseConnectionCredentials.AccessToken)
-                        {
-                            _rdpClient.TransportSettings2.GatewayUsername = gwu;
-                            _rdpClient.TransportSettings2.GatewayPassword = gwp;
-                            _rdpClient.TransportSettings2.GatewayDomain = gwd;
-                        }
-                        else
-                        {
-                            //TODO: should we check client version and throw if it is less than 7
-                        }
-                        
-                        break;
-                    }
                 }
             }
             catch (Exception ex)
@@ -502,6 +502,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 var domain = connectionInfo?.Domain ?? "";
                 var userViaApi = connectionInfo?.UserViaAPI ?? "";
                 var pkey = "";
+                var enableSecondFactor = connectionInfo?.EnableSecondFactor ?? false;
 
                 // access secret server api if necessary
                 if (InterfaceControl.Info.ExternalCredentialProvider == ExternalCredentialProvider.DelineaSecretServer)
@@ -545,6 +546,22 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 {
                     _rdpClient.UserName = userName;
                 }
+
+                // Second Factor extension
+                if (enableSecondFactor)
+                {
+                    using (var frmInputBox = new FrmInputBox("Second Factor",
+                               "Press the YubiKey.",
+                               ""))
+                    {
+                        var dr = frmInputBox.ShowDialog();
+                        if (dr == DialogResult.OK && !string.IsNullOrEmpty(frmInputBox.returnValue))
+                        {
+                            _rdpClient.UserName = $"{userName}-{frmInputBox.returnValue}";
+                        }
+                    }
+                }
+                // END: Second Factor extension
 
                 if (string.IsNullOrEmpty(password))
                 {
@@ -697,7 +714,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
             DriveInfo[] myDrives = DriveInfo.GetDrives();
             foreach (DriveInfo myDrive in myDrives)
             {
-                if (myDrive.Name.Substring(0, 1).Equals(drive.Name.Substring(0,1)))
+                if (myDrive.Name.Substring(0, 1).Equals(drive.Name.Substring(0, 1)))
                 {
                     return myDrive.DriveType == DriveType.Fixed;
                 }
@@ -790,7 +807,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
                 Runtime.MessageCollector.AddExceptionStackTrace(Language.RdpSetEventHandlersFailed, ex);
             }
         }
-        
+
         #endregion
 
         #region Private Events & Handlers
@@ -886,7 +903,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         }
 
         #endregion
-        
+
         #region Reconnect Stuff
 
         private void tmrReconnect_Elapsed(object sender, ElapsedEventArgs e)
